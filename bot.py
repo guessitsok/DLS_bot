@@ -57,10 +57,10 @@ async def help_command(message: types.Message):
 async def send_examples(message: types.Message):
     media = types.MediaGroup()
     media.attach_photo(types.InputFile(
-        'NST/pics/me_for_exp_1.jpg'), 'Content image')
+        'example/me_for_exp.jpg'), 'Content image')
     media.attach_photo(types.InputFile(
-        'NST/styles/style_3.jpg'), 'Style image')
-    media.attach_photo(types.InputFile('example_output.jpg'), 'Output image')
+        'example/style_3.jpg'), 'Style image')
+    media.attach_photo(types.InputFile('example/example.jpg'), 'Output image')
     await message.reply_media_group(media, reply=False)
 
 
