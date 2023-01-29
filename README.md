@@ -38,8 +38,8 @@ At first you should download the photo on which you want to transfer style
 Then download style image which will be used as style to your content photo
 ![title](example/readme_style_2.jpg)
 
-
-![You'll get the result in less than one minute](example/readme_style_3.jpg)
+You'll get the result in less than one minute
+![title](example/readme_style_3.jpg)
 
 # Deploying
 Telegram bot deployed on VM using VK Cloud. If you want to deploy it yourself you should buy subscription on VK Cloud, create virtual machine and clone this repo into VM's dir. 
