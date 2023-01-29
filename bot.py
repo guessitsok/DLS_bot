@@ -37,7 +37,6 @@ logging.basicConfig(level=logging.INFO)
 help_button = KeyboardButton(text='/help')
 style_button = KeyboardButton(text='/style')
 example_button = KeyboardButton(text='/example')
-back_button = KeyboardButton(text='/back')
 keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
 keyboard.add(help_button)
 keyboard.add(style_button)
@@ -69,7 +68,7 @@ async def help_command(message: types.Message):
     await message.reply(text=MESSAGES['help'], reply=False, reply_markup=keyboard)
 
 
-@dp.message_handler(commands=['example'])
+@dp.message_handler(commands=['example'], state='*')
 async def send_examples(message: types.Message):
     media = types.MediaGroup()
     media.attach_photo(types.InputFile(
