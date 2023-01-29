@@ -1,12 +1,12 @@
 # DLS_bot
 Telegram bot: [@DLS_swap_theme_bot][bot]
 
-# Описание проекта
-Данный репозиторий представляет собой финальный проект первого семестра курса [Школы Глубокого Обучения МФТИ][DLS].
+# Project description
+This repository is the final project of the first semester of the course [MIPT School of Deep Learning][DLS].
 
-**Тема проекта**: реализация Telegram бота по Вашего стиля на Вашу фотографию.
+**Project topic**: implementation of a Telegram bot to transfer your style to your photo.
 
-Проект включает в себя:
+The project includes:
 
 1. Style Transfer Network
 2. Telegram Bot
