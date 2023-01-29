@@ -10,6 +10,7 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State
 from aiogram.dispatcher.filters.state import StatesGroup
 from aiogram.types.message import ContentType
+from aiogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from aiogram.utils.helper import Helper, HelperMode, ListItem
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
@@ -33,6 +34,21 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 dp.middleware.setup(LoggingMiddleware())
 logging.basicConfig(level=logging.INFO)
 
+help_button = KeyboardButton(text='/help')
+style_button = KeyboardButton(text='/style')
+example_button = KeyboardButton(text='/example')
+back_button = KeyboardButton(text='/back')
+keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
+keyboard.add(help_button)
+keyboard.add(style_button)
+keyboard.add(example_button)
+
+
+async def delete_photos(user_id):
+    removing_files = glob.glob(f'bot_photo/{user_id}*.jpg')
+    for i in removing_files:
+        os.remove(i)
+
 
 async def do_nst(content_path,
                  style_path,
@@ -45,12 +61,12 @@ async def do_nst(content_path,
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    await message.reply(text=MESSAGES['start'], reply=False)
+    await message.reply(text=MESSAGES['start'], reply=False, reply_markup=keyboard)
 
 
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
-    await message.reply(text=MESSAGES['help'], reply=False)
+    await message.reply(text=MESSAGES['help'], reply=False, reply_markup=keyboard)
 
 
 @dp.message_handler(commands=['example'])
@@ -64,7 +80,7 @@ async def send_examples(message: types.Message):
     await message.reply_media_group(media, reply=False)
 
 
-@dp.message_handler(state='*', commands=['nst'])
+@dp.message_handler(state='*', commands=['style'])
 async def nst_command(message: types.Message):
     state = dp.current_state(user=message.from_user.id)
 
@@ -109,19 +125,14 @@ async def make_style(message: types.Message):
     media.attach_photo(types.InputFile(output_path), 'Output image')
 
     await message.reply_media_group(media, reply=False)
+    await message.answer(text=MESSAGES['end'])
     await state.reset_state()
     await delete_photos(message.from_user.id)
 
 
 @dp.message_handler(state='*')
-async def echo_message(msg: types.Message):
-    await bot.send_message(msg.from_user.id, 'Набери /nst, чтобы начать, или /help, чтобы посмотреть справку.')
-
-
-async def delete_photos(user_id):
-    removing_files = glob.glob(f'bot_photo/{user_id}*.jpg')
-    for i in removing_files:
-        os.remove(i)
+async def echo(message: types.Message):
+    await bot.send_message(chat_id=message.from_user.id, text=MESSAGES['echo'])
 
 
 async def shutdown(dispatcher: Dispatcher):
