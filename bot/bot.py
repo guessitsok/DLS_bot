@@ -83,7 +83,7 @@ async def nst_command(message: types.Message):
     state = dp.current_state(user=message.from_user.id)
 
     await BotStates().LOAD_CONTENT_STATE.set()
-    await message.reply(text='Загрузи картинку с контентом\n')
+    await message.reply(text='Upload a picture with content\n')
 
 
 @dp.message_handler(state=BotStates.LOAD_CONTENT_STATE, content_types=types.ContentType.PHOTO)
@@ -92,7 +92,7 @@ async def load_content(message: types.Message):
 
     await message.photo[-1].download(destination_file='bot_photo/{}_content.jpg'.format(message.from_user.id))
     await BotStates().LOAD_STYLE_STATE.set()
-    await message.reply(text='Теперь загрузи картинку, стиль которой будем переносить!',
+    await message.reply(text='Now upload a picture, the style of which we will transfer!',
                         reply=False)
 
 
@@ -109,7 +109,7 @@ async def load_style(message: types.Message):
 async def make_style(message: types.Message):
     state = dp.current_state(user=message.from_user.id)
 
-    await message.answer(text='Обработка займет меньше минуты!')
+    await message.answer(text='Processing will take less than a minute!')
 
     content_path = 'bot_photo/{}_content.jpg'.format(message.from_user.id)
     style_path = 'bot_photo/{}_style.jpg'.format(message.from_user.id)
