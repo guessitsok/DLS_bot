@@ -15,10 +15,10 @@ from aiogram.contrib.middlewares.logging import LoggingMiddleware
 
 from config import TOKEN_API
 sys.path.insert(1, 'net/')
+from messages import MESSAGES
 from nst import load_images
 from nst import make_nst
 from nst import load_net
-from messages import MESSAGES
 
 
 class BotStates(StatesGroup):
@@ -61,7 +61,7 @@ async def start_command(message: types.Message):
     await message.reply(text=MESSAGES['start'], reply=False, reply_markup=keyboard)
 
 
-@dp.message_handler(commands=['help'])
+@dp.message_handler(commands=['help'], state='*')
 async def help_command(message: types.Message):
     await message.reply(text=MESSAGES['help'], reply=False, reply_markup=keyboard)
 
