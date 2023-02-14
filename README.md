@@ -42,7 +42,9 @@ You'll get the result in less than one minute
 ![title](example/readme_style_3.jpg)
 
 # Deploying
-Telegram bot deployed on VM using VK Cloud. If you want to deploy it yourself you should buy subscription on VK Cloud, create virtual machine and clone this repo into VM's dir. 
+Telegram bot deployed on VM using VK Cloud. If you want to deploy it yourself you should buy subscription on VK Cloud, create virtual machine and clone this repo into VM's dir.
+
+UPD: Bot doesnt work now. VM on Vk Cloud stopped. 
 
 # Contact
 If you have some problems with bot or this repo, contact me!
